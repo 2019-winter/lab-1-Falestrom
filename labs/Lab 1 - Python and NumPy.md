@@ -14,7 +14,7 @@ jupyter:
 ---
 
 # Name(s)
-**PUT YOUR FULL NAME(S) HERE**
+**Fridtjof Gustaf Alestroem**
 
 
 **Instructions:** This is an individual assignment, but you may discuss your code with your neighbors.
@@ -47,45 +47,92 @@ For the following exercises please read the Python appendix in the Marsland text
 
 ```python
 # YOUR SOLUTION HERE
-#a=1000
-print('this is my answer',a+1) 
+import numpy as np
+
+a = np.ones((6,4))*2
+a
 ```
 
 ## Exercise 2
 
 ```python
 # YOUR SOLUTION HERE
-a=2000
+b = np.ones((6,4))*1
+np.fill_diagonal(b, 3)
+b
 ```
 
 ## Exercise 3
 
-```python
-# YOUR SOLUTION HERE
-```
+
+The dot product do not work because the the number of rows in the first matrics have to match the number of columns in the second matrics. 
+
 
 ## Exercise 4
 
 ```python
 # YOUR SOLUTION HERE
+
+c = np.dot(a, b.transpose())
+d = np.dot(a.transpose(), b)
+
+print(c)
+print(d)
 ```
 
 ## Exercise 5
 
 ```python
-# YOUR SOLUTION HERE
+def func(a):
+  print(a)
+```
+
+```python
+func("Hello World")
 ```
 
 ## Exercise 6
 
 ```python
 # YOUR SOLUTION HERE
+def array_generator():
+    dimention_x = np.random.randint(low=1, high=8)
+    dimention_y = np.random.randint(low=1, high=8)
+    array = np.random.rand(dimention_x,dimention_y)
+    mean_value = np.mean(array)
+    sum_value = np.sum(array)
+    print(array)
+    print(sum_value)
+    print(mean_value)
+array_generator()
 ```
 
 ## Exercise 7
 
 ```python
-# YOUR SOLUTION HERE
+#YOUR SOLUTION HERE
+def count_ones():
+    c = 0
+    for i in range(b.shape[0]):
+        for j in range(b.shape[1]):
+            if b[i,j] == 1:
+                c += 1
+    return c
+count_ones()
+```
+
+```python
+def count_ones2(array):
+    ones = np.where(array == 1)
+    print(len(array[ones]))
+
+count_ones2(b)
+
+
+
+
+
+    
 ```
 
 ## Excercises 8-???
@@ -97,6 +144,10 @@ Repeat exercise A.1 from Marsland, but create a Pandas DataFrame instead of a Nu
 
 ```python
 # YOUR SOLUTION HERE
+import pandas as pd
+
+df1 = pd.DataFrame(np.ones((6,4))*2, columns=list('ABCD'))
+df1
 ```
 
 ## Exercise 9
@@ -104,6 +155,9 @@ Repeat exercise A.2 using a DataFrame instead.
 
 ```python
 # YOUR SOLUTION HERE
+df2 = pd.DataFrame(np.ones((6,4))*1, columns=list('ABCD'))
+np.fill_diagonal(df2.values, 3)
+df2
 ```
 
 ## Exercise 10
@@ -111,6 +165,9 @@ Repeat exercise A.3 using DataFrames instead.
 
 ```python
 # YOUR SOLUTION HERE
+df1*df2
+# The dot product do not work because the the number of rows in the first matrics 
+# have to match the number of columns in the second matrics. 
 ```
 
 ## Exercise 11
@@ -118,6 +175,12 @@ Repeat exercise A.7 using a dataframe.
 
 ```python
 # YOUR SOLUTION HERE
+c=0
+for i in range(df2.shape[0]):
+    for j in range(df2.shape[1]):
+        if df2.iloc[i,j] == 1:
+            c += 1
+c
 ```
 
 ## Exercises 12-14
@@ -138,6 +201,9 @@ How do you select the ``name`` column without using .iloc?
 
 ```python
 ## YOUR SOLUTION HERE
+names = titanic_df['name']
+names
+
 ```
 
 ## Exercise 13
@@ -146,6 +212,7 @@ After setting the index to ``sex``, how do you select all passengers that are ``
 ```python
 ## YOUR SOLUTION HERE
 titanic_df.set_index('sex',inplace=True)
+titanic_df.loc['female']
 ```
 
 ## Exercise 14
@@ -153,6 +220,8 @@ How do you reset the index?
 
 ```python
 ## YOUR SOLUTION HERE
+titanic_df.reset_index()
+
 ```
 
 ```python
